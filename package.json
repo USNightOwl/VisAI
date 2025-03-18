@@ -1,5 +1,6 @@
 {
-  "name": "react-template",
+  "name": "visai",
+  "homepage": "https://usnightowl.github.io/visai",
   "private": true,
   "version": "0.0.0",
   "type": "module",
