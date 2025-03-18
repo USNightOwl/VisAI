@@ -1,11 +1,11 @@
-import Home from "@/components/Home";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/router";
 
 function App() {
   return (
-    <div className="text-red-500 text-5xl text-center font-bold">
-      React Boilerplate
-      <Home />
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
