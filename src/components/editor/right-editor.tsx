@@ -2,29 +2,14 @@ import UploadFile from "../upload/upload-file";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ConvertImageGroup from "./convert-image-group";
 import GenerateImage from "./generate-image";
+import { AppDispatch, AppState } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
+import { changeNumberOfImages, setReferencePhoto, setTargetPhoto } from "@/store/input";
 
-/* eslint-disable no-unused-vars */
-type Props = {
-  referencePhoto: string | null;
-  targetPhoto: string | null;
-  numberOfImages: number;
-  isLoading: boolean;
-  setNumberOfImages: React.Dispatch<React.SetStateAction<number>>;
-  changeReferencePhoto: (url: string | null) => void;
-  changeTargetPhoto: (url: string | null) => void;
-  changeStateLoading: (state: boolean) => void;
-};
+const RightEditor = () => {
+  const input = useSelector((state: AppState) => state.input);
+  const dispatch = useDispatch<AppDispatch>();
 
-const RightEditor = ({
-  referencePhoto,
-  targetPhoto,
-  numberOfImages,
-  isLoading,
-  setNumberOfImages,
-  changeTargetPhoto,
-  changeReferencePhoto,
-  changeStateLoading,
-}: Props) => {
   return (
     <div className="w-full lg:w-2/5 order-1 lg:order-2">
       <div className="h-full overflow-y-auto">
@@ -35,16 +20,16 @@ const RightEditor = ({
             <div className="flex flex-col md:flex-row md:gap-0 gap-2 justify-between">
               <div className="w-full md:w-[49%]">
                 <UploadFile
-                  photo={referencePhoto}
-                  changePhoto={changeReferencePhoto}
+                  photo={input.referencePhoto}
+                  changePhoto={(url) => dispatch(setReferencePhoto(url))}
                   title="Ảnh Tham Chiếu"
                   context="Tải lên ảnh tham chiếu"
                 />
               </div>
               <div className="w-full md:w-[49%]">
                 <UploadFile
-                  photo={targetPhoto}
-                  changePhoto={changeTargetPhoto}
+                  photo={input.targetPhoto}
+                  changePhoto={(url) => dispatch(setTargetPhoto(url))}
                   title="Ảnh Mục Tiêu"
                   context="Tải lên ảnh mục tiêu"
                 />
@@ -56,17 +41,17 @@ const RightEditor = ({
             <span className="text-xl font-semibold">Số Lượng Ảnh</span>
             <div className="flex items-center">
               <button
-                className={`px-3 py-2 bg-gray-200 rounded-l-md hover:bg-gray-300 disabled:opacity-50 ${numberOfImages > 1 && "cursor-pointer"}`}
-                disabled={numberOfImages === 1}
-                onClick={() => setNumberOfImages(numberOfImages - 1)}
+                className={`px-3 py-2 bg-gray-200 rounded-l-md hover:bg-gray-300 disabled:opacity-50 ${input.numberOfImages > 1 && "cursor-pointer"}`}
+                disabled={input.numberOfImages === 1}
+                onClick={() => dispatch(changeNumberOfImages(-1))}
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="px-4 py-2 bg-gray-100 font-medium min-w-[40px] text-center">{numberOfImages}</span>
+              <span className="px-4 py-2 bg-gray-100 font-medium min-w-[40px] text-center">{input.numberOfImages}</span>
               <button
-                className={`px-3 py-2 bg-gray-200 rounded-r-md hover:bg-gray-300 disabled:opacity-50 ${numberOfImages < 4 && "cursor-pointer"}`}
-                disabled={numberOfImages === 4}
-                onClick={() => setNumberOfImages(numberOfImages + 1)}
+                className={`px-3 py-2 bg-gray-200 rounded-r-md hover:bg-gray-300 disabled:opacity-50 ${input.numberOfImages < 4 && "cursor-pointer"}`}
+                disabled={input.numberOfImages === 4}
+                onClick={() => dispatch(changeNumberOfImages(1))}
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -74,7 +59,7 @@ const RightEditor = ({
             </div>
           </div>
           {/* Generate Image */}
-          <GenerateImage isLoading={isLoading} changeStateLoading={changeStateLoading} />
+          <GenerateImage />
           {/* Convert Image */}
           <ConvertImageGroup />
         </div>

@@ -11,12 +11,17 @@ export const resultsReducer = {
     ];
   },
   setResults(state: IImageResultRoot, action: PayloadAction<string[]>) {
-    state.results = [];
     for (const image of action.payload) {
       state.results.push({
         id: state.results.length,
         url: image,
       });
     }
+  },
+  pushResult(state: IImageResultRoot, action: PayloadAction<string>) {
+    state.results.push({
+      id: state.results.length,
+      url: action.payload,
+    });
   },
 };

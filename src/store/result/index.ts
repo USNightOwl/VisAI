@@ -15,6 +15,6 @@ const resultsSlice = createSlice({
 
 const { actions, reducer } = resultsSlice;
 
-export const { setResult, setResults } = actions;
+export const { setResult, setResults, pushResult } = actions;
 
 export default reducer;

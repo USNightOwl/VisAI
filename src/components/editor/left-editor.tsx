@@ -1,15 +1,38 @@
 import { SamplePhoto } from "@/constants/sample-photo";
-import { AppState } from "@/store";
-import { Download, RefreshCw } from "lucide-react";
-import { useSelector } from "react-redux";
+import { AppDispatch, AppState } from "@/store";
+import { setReferencePhoto } from "@/store/input";
+import { ChevronLeft, ChevronRight, Copy, Download, RefreshCw } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-type Props = {
-  // eslint-disable-next-line no-unused-vars
-  changeTargetPhoto: (url: string) => void;
-};
+const LeftEditor = () => {
+  const [currentImage, setCurrentImage] = useState(SamplePhoto[0].url);
+  const [curentIndex, setCurrentIndex] = useState(0);
 
-const LeftEditor = ({ changeTargetPhoto }: Props) => {
   const results = useSelector((state: AppState) => state.results);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const changeShowImage = (index: number) => {
+    if (index < 0 || index >= results.results.length) return;
+    setCurrentImage(results.results[index].url);
+    setCurrentIndex(index);
+  };
+
+  const handleCopy = async () => {
+    try {
+      const textToCopy = currentImage;
+      await navigator.clipboard.writeText(textToCopy);
+    } catch (error) {
+      console.error("Lỗi khi sao chép:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (results.results.length > 0) {
+      changeShowImage(0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [results]);
 
   return (
     <div className="w-full lg:w-3/5 order-2 lg:order-1">
@@ -18,7 +41,7 @@ const LeftEditor = ({ changeTargetPhoto }: Props) => {
           <h2 className="text-xl font-semibold">Xem Trước</h2>
           <div className="flex gap-2">
             <a
-              href={results.results.length > 0 ? results.results[0].url : SamplePhoto[0].url}
+              href={currentImage}
               download="transformed-image.png"
               className="flex items-center gap-1 px-2 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 cursor-pointer"
             >
@@ -27,7 +50,9 @@ const LeftEditor = ({ changeTargetPhoto }: Props) => {
             </a>
             <button
               className="flex items-center gap-1 px-2 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 cursor-pointer"
-              onClick={() => changeTargetPhoto("")}
+              onClick={() => {
+                dispatch(setReferencePhoto(currentImage));
+              }}
             >
               <RefreshCw className="w-4 h-4" />
               <span>Làm ảnh tham chiếu</span>
@@ -37,12 +62,36 @@ const LeftEditor = ({ changeTargetPhoto }: Props) => {
         <div className="min-h-[300px] lg:min-h-0 lg:flex-1">
           <div className="h-full flex flex-col">
             <div className="flex-1 bg-gray-50 rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                alt="Result"
-                className="max-w-full max-h-full object-contain"
-                src={results.results.length > 0 ? results.results[0].url : SamplePhoto[0].url}
-              />
+              <img alt="Result" className="max-w-full max-h-full object-contain" src={currentImage} />
             </div>
+            {results.results.length > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-3">
+                <button
+                  className="p-1 bg-gray-200 rounded-full hover:bg-gray-300 disabled:opacity-50 cursor-pointer disabled:cursor-default"
+                  disabled={curentIndex === 0}
+                  onClick={() => changeShowImage(curentIndex - 1)}
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <span className="text-sm font-medium">
+                  {curentIndex + 1} / {results.results.length}
+                </span>
+                <button
+                  className="p-1 bg-gray-200 rounded-full hover:bg-gray-300 disabled:opacity-50 cursor-pointer disabled:cursor-default"
+                  disabled={curentIndex === results.results.length - 1}
+                  onClick={() => changeShowImage(curentIndex + 1)}
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+                <button
+                  className="p-1 bg-gray-200 rounded-full hover:bg-gray-300 ml-2 cursor-pointer"
+                  title="Sao chép ảnh vào clipboard"
+                  onClick={handleCopy}
+                >
+                  <Copy className="w-5 h-5" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

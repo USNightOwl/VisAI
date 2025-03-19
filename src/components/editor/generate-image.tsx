@@ -1,24 +1,20 @@
 import { runGeminiGenerateImage, runGeminiGeneratePrompt } from "@/config/gemini";
 import { promptData } from "@/constants/prompt";
-import { AppDispatch } from "@/store";
-import { setResult } from "@/store/result";
-import { ChevronLeft, Sparkles, WandSparkles } from "lucide-react";
+import { AppDispatch, AppState } from "@/store";
+import { setIsLoading } from "@/store/input";
+import { pushResult, setResult } from "@/store/result";
+import { ChevronLeft, LoaderCircle, Sparkles, WandSparkles } from "lucide-react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-/* eslint-disable no-unused-vars */
-type Props = {
-  isLoading: boolean;
-  changeStateLoading: (state: boolean) => void;
-};
-
-const GenerateImage = ({ isLoading, changeStateLoading }: Props) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [prompt, setPrompt] = useState("Ảnh chân dung cô gái đứng ở bãi biển");
+const GeneratePrompt = ({ setPrompt }: { setPrompt: React.Dispatch<React.SetStateAction<string>> }) => {
+  const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
+  const input = useSelector((state: AppState) => state.input);
 
   const handleGeneratePrompt = async () => {
-    changeStateLoading(true);
+    dispatch(setIsLoading(true));
+    setIsCurrentLoading(true);
 
     try {
       const res = await runGeminiGeneratePrompt(JSON.stringify(promptData["generate-content"]));
@@ -26,23 +22,54 @@ const GenerateImage = ({ isLoading, changeStateLoading }: Props) => {
     } catch (error) {
       console.log(error);
     } finally {
-      changeStateLoading(false);
+      dispatch(setIsLoading(false));
+      setIsCurrentLoading(false);
     }
   };
+  return (
+    <button
+      type="button"
+      className={`px-3 py-1.5 rounded-lg text-sm font-medium w-full md:w-1/2 text-white ${input.isLoading ? "cursor-not-allowed bg-gray-400" : "cursor-pointer bg-purple-600 hover:bg-purple-700"}`}
+      onClick={handleGeneratePrompt}
+      disabled={input.isLoading}
+    >
+      <span className="flex flex-row items-center justify-center">
+        {isCurrentLoading ? (
+          <LoaderCircle className="w-4 h-4 mr-2 animate-spin" />
+        ) : (
+          <Sparkles className="w-4 h-4 mr-2" />
+        )}
+        Gợi Ý Ngẫu Nhiên
+      </span>
+    </button>
+  );
+};
+const GenerateImage = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [isCurrentLoading, setIsCurrentLoading] = useState(false);
+  const [prompt, setPrompt] = useState("Ảnh chân dung cô gái đứng ở bãi biển");
+  const dispatch = useDispatch<AppDispatch>();
+  const input = useSelector((state: AppState) => state.input);
 
   const handleGenerateImages = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    changeStateLoading(true);
+    dispatch(setIsLoading(true));
+    setIsCurrentLoading(true);
+
     try {
       // Call the API to generate images
-      const res = await runGeminiGenerateImage(
-        JSON.stringify(promptData["generate-image"]).replace("{prompt}", prompt),
-      );
-      dispatch(setResult("data:image/png;base64," + res.data));
+      for (let i = 0; i < input.numberOfImages; i++) {
+        const res = await runGeminiGenerateImage(
+          JSON.stringify(promptData["generate-image"]).replace("{prompt}", prompt),
+        );
+        if (i === 0) dispatch(setResult("data:image/png;base64," + res.data));
+        else dispatch(pushResult("data:image/png;base64," + res.data));
+      }
     } catch (error) {
       console.log(error);
     } finally {
-      changeStateLoading(false);
+      dispatch(setIsLoading(false));
+      setIsCurrentLoading(false);
     }
   };
 
@@ -66,24 +93,18 @@ const GenerateImage = ({ isLoading, changeStateLoading }: Props) => {
               />
             </div>
             <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-2">
-              <button
-                type="button"
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium w-full md:w-1/2 text-white ${isLoading ? "cursor-not-allowed bg-gray-400" : "cursor-pointer bg-purple-600 hover:bg-purple-700"}`}
-                onClick={handleGeneratePrompt}
-                disabled={isLoading}
-              >
-                <span className="flex flex-row items-center justify-center">
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  Gợi Ý Ngẫu Nhiên
-                </span>
-              </button>
+              <GeneratePrompt setPrompt={setPrompt} />
               <button
                 type="submit"
-                className={`px-3 py-1.5 rounded-lg text-white text-sm font-medium w-full md:w-1/2 ${isLoading ? "cursor-not-allowed bg-gray-400" : "cursor-pointer bg-blue-600 hover:bg-blue-700"}`}
-                disabled={isLoading}
+                className={`px-3 py-1.5 rounded-lg text-white text-sm font-medium w-full md:w-1/2 ${input.isLoading ? "cursor-not-allowed bg-gray-400" : "cursor-pointer bg-blue-600 hover:bg-blue-700"}`}
+                disabled={input.isLoading}
               >
                 <span className="flex flex-row items-center justify-center">
-                  <WandSparkles className="w-4 h-4 mr-2" />
+                  {isCurrentLoading ? (
+                    <LoaderCircle className="w-4 h-4 mr-2 animate-spin" />
+                  ) : (
+                    <WandSparkles className="w-4 h-4 mr-2" />
+                  )}
                   Tạo Ảnh
                 </span>
               </button>
