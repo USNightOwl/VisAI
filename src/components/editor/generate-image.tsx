@@ -1,7 +1,10 @@
-import { runGemini } from "@/config/gemini";
+import { runGeminiGenerateImage, runGeminiGeneratePrompt } from "@/config/gemini";
 import { promptData } from "@/constants/prompt";
+import { AppDispatch } from "@/store";
+import { setResult } from "@/store/result";
 import { ChevronLeft, Sparkles, WandSparkles } from "lucide-react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 /* eslint-disable no-unused-vars */
 type Props = {
@@ -12,13 +15,30 @@ type Props = {
 const GenerateImage = ({ isLoading, changeStateLoading }: Props) => {
   const [isOpen, setIsOpen] = useState(true);
   const [prompt, setPrompt] = useState("Ảnh chân dung cô gái đứng ở bãi biển");
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleGeneratePrompt = async () => {
     changeStateLoading(true);
 
     try {
-      const res = await runGemini(JSON.stringify(promptData["generate-content"]));
+      const res = await runGeminiGeneratePrompt(JSON.stringify(promptData["generate-content"]));
       setPrompt(res);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      changeStateLoading(false);
+    }
+  };
+
+  const handleGenerateImages = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    changeStateLoading(true);
+    try {
+      // Call the API to generate images
+      const res = await runGeminiGenerateImage(
+        JSON.stringify(promptData["generate-image"]).replace("{prompt}", prompt),
+      );
+      dispatch(setResult("data:image/png;base64," + res.data));
     } catch (error) {
       console.log(error);
     } finally {
@@ -36,7 +56,7 @@ const GenerateImage = ({ isLoading, changeStateLoading }: Props) => {
       </div>
       {isOpen && (
         <div className="mt-3">
-          <form className="space-y-3">
+          <form className="space-y-3" onSubmit={handleGenerateImages}>
             <div>
               <textarea
                 placeholder="Mô tả hình ảnh bạn muốn tạo..."
@@ -59,7 +79,7 @@ const GenerateImage = ({ isLoading, changeStateLoading }: Props) => {
               </button>
               <button
                 type="submit"
-                className="px-3 py-1.5 rounded-lg text-white text-sm font-medium w-full md:w-1/2 bg-blue-600 hover:bg-blue-700 cursor-pointer"
+                className={`px-3 py-1.5 rounded-lg text-white text-sm font-medium w-full md:w-1/2 ${isLoading ? "cursor-not-allowed bg-gray-400" : "cursor-pointer bg-blue-600 hover:bg-blue-700"}`}
                 disabled={isLoading}
               >
                 <span className="flex flex-row items-center justify-center">

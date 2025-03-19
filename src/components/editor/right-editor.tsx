@@ -12,7 +12,6 @@ type Props = {
   setNumberOfImages: React.Dispatch<React.SetStateAction<number>>;
   changeReferencePhoto: (url: string | null) => void;
   changeTargetPhoto: (url: string | null) => void;
-  changeResultsPhoto: (url: string[]) => void;
   changeStateLoading: (state: boolean) => void;
 };
 

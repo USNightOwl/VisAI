@@ -13,9 +13,8 @@ const resultsSlice = createSlice({
   reducers: resultsReducer,
 });
 
-// const { actions, reducer } = resultsSlice;
-const { reducer } = resultsSlice;
+const { actions, reducer } = resultsSlice;
 
-// export const {  } = actions;
+export const { setResult, setResults } = actions;
 
 export default reducer;
