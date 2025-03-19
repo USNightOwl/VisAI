@@ -24,8 +24,8 @@ const ModalApiKey = () => {
       </button>
       {isOpen && (
         <>
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsOpen(false)}></div>
-          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-3xl shadow-xl">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-1000" onClick={() => setIsOpen(false)}></div>
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-3xl shadow-xl z-1000">
             <div className="flex items-center gap-2 mb-4">
               <Key className="w-6 h-6 text-blue-600" />
               <h2 className="text-xl font-semibold">Nhập API Key của Google AI Studio</h2>

@@ -1,25 +1,30 @@
-import React from "react";
 import UploadFile from "../upload/upload-file";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import ConvertImageGroup from "./convert-image-group";
+import GenerateImage from "./generate-image";
 
 /* eslint-disable no-unused-vars */
 type Props = {
   referencePhoto: string | null;
   targetPhoto: string | null;
   numberOfImages: number;
+  isLoading: boolean;
   setNumberOfImages: React.Dispatch<React.SetStateAction<number>>;
   changeReferencePhoto: (url: string | null) => void;
   changeTargetPhoto: (url: string | null) => void;
   changeResultsPhoto: (url: string[]) => void;
+  changeStateLoading: (state: boolean) => void;
 };
 
 const RightEditor = ({
   referencePhoto,
   targetPhoto,
   numberOfImages,
+  isLoading,
   setNumberOfImages,
   changeTargetPhoto,
   changeReferencePhoto,
+  changeStateLoading,
 }: Props) => {
   return (
     <div className="w-full lg:w-2/5 order-1 lg:order-2">
@@ -69,6 +74,10 @@ const RightEditor = ({
               <span className="ml-3 text-sm text-gray-500">Tối đa: 4</span>
             </div>
           </div>
+          {/* Generate Image */}
+          <GenerateImage isLoading={isLoading} changeStateLoading={changeStateLoading} />
+          {/* Convert Image */}
+          <ConvertImageGroup />
         </div>
       </div>
     </div>
