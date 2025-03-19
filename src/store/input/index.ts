@@ -5,6 +5,7 @@ import { inputReducer } from "./reducer";
 
 const initialState: IInput = {
   numberOfImages: 1,
+  prompt: "Ảnh chân dung cô gái đứng ở bãi biển",
   referencePhoto: null,
   targetPhoto: null,
   isLoading: false,
@@ -18,6 +19,6 @@ const inputSlice = createSlice({
 
 const { actions, reducer } = inputSlice;
 
-export const { changeNumberOfImages, setReferencePhoto, setTargetPhoto, setIsLoading } = actions;
+export const { changeNumberOfImages, setReferencePhoto, setTargetPhoto, setIsLoading, setPrompt } = actions;
 
 export default reducer;

@@ -1,13 +1,15 @@
 import { runGeminiGenerateImage, runGeminiGeneratePrompt } from "@/config/gemini";
 import { promptData } from "@/constants/prompt";
 import { AppDispatch, AppState } from "@/store";
-import { setIsLoading } from "@/store/input";
+import { setIsLoading, setPrompt } from "@/store/input";
 import { pushResult, setResult } from "@/store/result";
+import { parseStatusCode } from "@/utils/convert";
 import { ChevronLeft, LoaderCircle, Sparkles, WandSparkles } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const GeneratePrompt = ({ setPrompt }: { setPrompt: React.Dispatch<React.SetStateAction<string>> }) => {
+// eslint-disable-next-line no-unused-vars
+const GeneratePrompt = ({ setPrompt }: { setPrompt: (prompt: string) => void }) => {
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const input = useSelector((state: AppState) => state.input);
@@ -20,7 +22,7 @@ const GeneratePrompt = ({ setPrompt }: { setPrompt: React.Dispatch<React.SetStat
       const res = await runGeminiGeneratePrompt(JSON.stringify(promptData["generate-content"]));
       setPrompt(res);
     } catch (error) {
-      console.log(error);
+      parseStatusCode(error as Error);
     } finally {
       dispatch(setIsLoading(false));
       setIsCurrentLoading(false);
@@ -47,7 +49,6 @@ const GeneratePrompt = ({ setPrompt }: { setPrompt: React.Dispatch<React.SetStat
 const GenerateImage = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
-  const [prompt, setPrompt] = useState("Ảnh chân dung cô gái đứng ở bãi biển");
   const dispatch = useDispatch<AppDispatch>();
   const input = useSelector((state: AppState) => state.input);
 
@@ -60,13 +61,13 @@ const GenerateImage = () => {
       // Call the API to generate images
       for (let i = 0; i < input.numberOfImages; i++) {
         const res = await runGeminiGenerateImage(
-          JSON.stringify(promptData["generate-image"]).replace("{prompt}", prompt),
+          JSON.stringify(promptData["generate-image"]).replace("{prompt}", input.prompt),
         );
         if (i === 0) dispatch(setResult("data:image/png;base64," + res.data));
         else dispatch(pushResult("data:image/png;base64," + res.data));
       }
     } catch (error) {
-      console.log(error);
+      parseStatusCode(error as Error);
     } finally {
       dispatch(setIsLoading(false));
       setIsCurrentLoading(false);
@@ -76,7 +77,7 @@ const GenerateImage = () => {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mb-4">
       <div className="flex justify-between items-center cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-        <h2 className="text-xl font-semibold">Biến Đổi</h2>
+        <h2 className="text-xl font-semibold">Tạo Ảnh</h2>
         <button className="text-gray-500 hover:text-gray-700 cursor-pointer">
           <ChevronLeft className={`w-5 h-5 transform ${isOpen ? "rotate-90" : "-rotate-90"}`} />
         </button>
@@ -88,12 +89,13 @@ const GenerateImage = () => {
               <textarea
                 placeholder="Mô tả hình ảnh bạn muốn tạo..."
                 className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
+                value={input.prompt}
+                rows={4}
+                onChange={(e) => dispatch(setPrompt(e.target.value))}
               />
             </div>
             <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-2">
-              <GeneratePrompt setPrompt={setPrompt} />
+              <GeneratePrompt setPrompt={(prompt) => dispatch(setPrompt(prompt))} />
               <button
                 type="submit"
                 className={`px-3 py-1.5 rounded-lg text-white text-sm font-medium w-full md:w-1/2 ${input.isLoading ? "cursor-not-allowed bg-gray-400" : "cursor-pointer bg-blue-600 hover:bg-blue-700"}`}

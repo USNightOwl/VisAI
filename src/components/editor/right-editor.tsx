@@ -41,16 +41,16 @@ const RightEditor = () => {
             <span className="text-xl font-semibold">Số Lượng Ảnh</span>
             <div className="flex items-center">
               <button
-                className={`px-3 py-2 bg-gray-200 rounded-l-md hover:bg-gray-300 disabled:opacity-50 ${input.numberOfImages > 1 && "cursor-pointer"}`}
-                disabled={input.numberOfImages === 1}
+                className={`px-3 py-2 bg-gray-200 rounded-l-md hover:bg-gray-300 disabled:opacity-50 ${input.numberOfImages > 1 && !input.isLoading && "cursor-pointer"}`}
+                disabled={input.numberOfImages === 1 || input.isLoading}
                 onClick={() => dispatch(changeNumberOfImages(-1))}
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <span className="px-4 py-2 bg-gray-100 font-medium min-w-[40px] text-center">{input.numberOfImages}</span>
               <button
-                className={`px-3 py-2 bg-gray-200 rounded-r-md hover:bg-gray-300 disabled:opacity-50 ${input.numberOfImages < 4 && "cursor-pointer"}`}
-                disabled={input.numberOfImages === 4}
+                className={`px-3 py-2 bg-gray-200 rounded-r-md hover:bg-gray-300 disabled:opacity-50 ${input.numberOfImages < 4 && !input.isLoading && "cursor-pointer"}`}
+                disabled={input.numberOfImages === 4 || input.isLoading}
                 onClick={() => dispatch(changeNumberOfImages(1))}
               >
                 <ChevronRight className="w-4 h-4" />
@@ -59,7 +59,7 @@ const RightEditor = () => {
             </div>
           </div>
           {/* Generate Image */}
-          <GenerateImage />
+          {!input.referencePhoto && <GenerateImage />}
           {/* Convert Image */}
           <ConvertImageGroup />
         </div>

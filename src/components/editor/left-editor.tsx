@@ -3,6 +3,7 @@ import { AppDispatch, AppState } from "@/store";
 import { setReferencePhoto } from "@/store/input";
 import { ChevronLeft, ChevronRight, Copy, Download, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 const LeftEditor = () => {
@@ -22,6 +23,7 @@ const LeftEditor = () => {
     try {
       const textToCopy = currentImage;
       await navigator.clipboard.writeText(textToCopy);
+      toast.success("Đã sao chép ảnh vào clipboard!");
     } catch (error) {
       console.error("Lỗi khi sao chép:", error);
     }

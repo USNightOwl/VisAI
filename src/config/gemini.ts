@@ -21,11 +21,11 @@ export interface ModelResponse {
   };
 }
 
-const apiKey = localStorage.getItem("apiKey")?.replace('"', "").replace('"', "") || "";
-
-const genAI = new GoogleGenerativeAI(apiKey);
-
 export async function runGeminiGeneratePrompt(prompt: string) {
+  const apiKey = localStorage.getItem("apiKey")?.replace('"', "").replace('"', "") || "";
+
+  const genAI = new GoogleGenerativeAI(apiKey);
+
   const model = genAI.getGenerativeModel({
     model: "gemini-2.0-flash-exp",
   });
@@ -48,6 +48,10 @@ export async function runGeminiGeneratePrompt(prompt: string) {
 }
 
 export async function runGeminiGenerateImage(prompt: string) {
+  const apiKey = localStorage.getItem("apiKey")?.replace('"', "").replace('"', "") || "";
+
+  const genAI = new GoogleGenerativeAI(apiKey);
+
   const generationConfig = {
     temperature: 1,
     topP: 0.95,
@@ -61,17 +65,13 @@ export async function runGeminiGenerateImage(prompt: string) {
     generationConfig,
   });
 
-  try {
-    const response = await model.generateContent(prompt);
-    for (const part of (response as ModelResponse).response.candidates[0].content.parts) {
-      // Based on the part type, either show the text or save the image
-      if (part.text) {
-        console.log(part.text);
-      } else if (part.inlineData) {
-        return part.inlineData;
-      }
+  const response = await model.generateContent(prompt);
+  for (const part of (response as ModelResponse).response.candidates[0].content.parts) {
+    // Based on the part type, either show the text or save the image
+    if (part.text) {
+      console.log(part.text);
+    } else if (part.inlineData) {
+      return part.inlineData;
     }
-  } catch (error) {
-    console.log(error);
   }
 }

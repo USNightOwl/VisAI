@@ -2,6 +2,7 @@ import { Key, Settings } from "lucide-react";
 import { useContext, useState } from "react";
 import SlideModel from "../slide/slide-model";
 import { GlobalContext } from "@/contexts/global-context";
+import toast from "react-hot-toast";
 
 const ModalApiKey = () => {
   const { apiKey, setApiKey } = useContext(GlobalContext)!;
@@ -10,6 +11,7 @@ const ModalApiKey = () => {
 
   const handleChangeApiKey = () => {
     setApiKey(apiKeyText);
+    toast.success("Đã lưu API Key thành công");
     setIsOpen(false);
   };
 

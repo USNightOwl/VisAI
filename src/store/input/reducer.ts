@@ -16,4 +16,7 @@ export const inputReducer = {
   setIsLoading(state: IInput, action: PayloadAction<boolean>) {
     state.isLoading = action.payload;
   },
+  setPrompt(state: IInput, action: PayloadAction<string>) {
+    state.prompt = action.payload;
+  },
 };
