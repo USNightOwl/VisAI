@@ -20,6 +20,27 @@ export const convertToBase64 = (file: File): Promise<string> => {
   });
 };
 
+export function convertImageToBase64(imagePath: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.drawImage(img, 0, 0);
+        const dataURL = canvas.toDataURL("image/png");
+        resolve(dataURL);
+      } else {
+        reject("Error: Unable to get canvas context");
+      }
+    };
+    img.onerror = reject;
+    img.src = imagePath;
+  });
+}
+
 export function parseStatusCode(error: Error): number {
   const regex = /\[(\d+)[\s\w]*\]/;
 

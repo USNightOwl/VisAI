@@ -19,7 +19,7 @@ const GeneratePrompt = ({ setPrompt }: { setPrompt: (prompt: string) => void }) 
     setIsCurrentLoading(true);
 
     try {
-      const res = await runGeminiGeneratePrompt(JSON.stringify(promptData["generate-content"]));
+      const res = await runGeminiGeneratePrompt(promptData["generate-content"]);
       setPrompt(res);
     } catch (error) {
       parseStatusCode(error as Error);
@@ -60,9 +60,7 @@ const GenerateImage = () => {
     try {
       // Call the API to generate images
       for (let i = 0; i < input.numberOfImages; i++) {
-        const res = await runGeminiGenerateImage(
-          JSON.stringify(promptData["generate-image"]).replace("{prompt}", input.prompt),
-        );
+        const res = await runGeminiGenerateImage(input.prompt);
         if (i === 0) dispatch(setResult("data:image/png;base64," + res.data));
         else dispatch(pushResult("data:image/png;base64," + res.data));
       }

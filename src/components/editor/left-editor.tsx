@@ -39,9 +39,9 @@ const LeftEditor = () => {
   return (
     <div className="w-full lg:w-3/5 order-2 lg:order-1">
       <div className="bg-white rounded-lg shadow-md p-4 flex flex-col md:h-[calc(100vh-8rem)]">
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
           <h2 className="text-xl font-semibold">Xem Trước</h2>
-          <div className="flex gap-2">
+          <div className="flex gap-2 mt-2 sm:mt-0">
             <a
               href={currentImage}
               download="transformed-image.png"
