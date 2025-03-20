@@ -4,7 +4,11 @@ import SlideModel from "../slide/slide-model";
 import { GlobalContext } from "@/contexts/global-context";
 import toast from "react-hot-toast";
 
-const ModalApiKey = () => {
+type Props = {
+  isMobile?: boolean;
+};
+
+const ModalApiKey = ({ isMobile = false }: Props) => {
   const { apiKey, setApiKey } = useContext(GlobalContext)!;
   const [isOpen, setIsOpen] = useState(false);
   const [apiKeyText, setApiKeyText] = useState(apiKey);
@@ -17,13 +21,22 @@ const ModalApiKey = () => {
 
   return (
     <>
-      <button
-        className="flex items-center gap-2 px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 cursor-pointer"
-        onClick={() => setIsOpen(true)}
-      >
-        <Settings className="w-5 h-5" />
-        <span className="hidden sm:inline">API Key</span>
-      </button>
+      {isMobile ? (
+        <button
+          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+          onClick={() => setIsOpen(true)}
+        >
+          API Key
+        </button>
+      ) : (
+        <button
+          className="flex items-center gap-2 px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 cursor-pointer"
+          onClick={() => setIsOpen(true)}
+        >
+          <Settings className="w-5 h-5" />
+          <span className="hidden sm:inline">API Key</span>
+        </button>
+      )}
       {isOpen && (
         <>
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-1000" onClick={() => setIsOpen(false)}></div>
