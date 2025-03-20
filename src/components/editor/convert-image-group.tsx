@@ -3,6 +3,7 @@ import { useState } from "react";
 import ButtonZoom from "../button/convert/button-zoom";
 import ButtonExpand from "../button/convert/button-expand";
 import ButtonSwapFace from "../button/convert/button-swap-face";
+import ButtonVton from "../button/convert/button-vton";
 
 const ConvertImageGroup = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -22,6 +23,7 @@ const ConvertImageGroup = () => {
             <ButtonZoom />
             <ButtonExpand />
             <ButtonSwapFace />
+            <ButtonVton />
           </div>
         </div>
       )}
