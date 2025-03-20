@@ -36,6 +36,7 @@ const ButtonExpand = () => {
 
   return (
     <ButtonConvert
+      id={"button-swap-expand"}
       className="bg-cyan-600 hover:bg-cyan-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}

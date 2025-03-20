@@ -2,6 +2,7 @@ import { ChevronLeft } from "lucide-react";
 import { useState } from "react";
 import ButtonZoom from "../button/convert/button-zoom";
 import ButtonExpand from "../button/convert/button-expand";
+import ButtonSwapFace from "../button/convert/button-swap-face";
 
 const ConvertImageGroup = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -20,6 +21,7 @@ const ConvertImageGroup = () => {
             {/* Zoom */}
             <ButtonZoom />
             <ButtonExpand />
+            <ButtonSwapFace />
           </div>
         </div>
       )}

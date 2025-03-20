@@ -1,28 +1,29 @@
 import ButtonConvert from "../button-convert";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppState } from "@/store";
-import { LoaderCircle, ZoomIn } from "lucide-react";
+import { LoaderCircle, RefreshCw } from "lucide-react";
 import default_img from "@/assets/sample/default.webp";
-import zoom_in_image from "@/assets/sample/zoom_in.webp";
-import SampleOneInput from "@/components/sample/sample-one-input";
+import swap_faces_input from "@/assets/sample/swap_faces_input.webp";
+import swap_faces from "@/assets/sample/swap_faces.webp";
 import { runGeminiConvertImage } from "@/config/gemini";
 import { promptData } from "@/constants/prompt";
 import { setIsLoading } from "@/store/input";
 import { parseStatusCode } from "@/utils/convert";
 import { pushResult, setResult } from "@/store/result";
 import { useState } from "react";
+import SampleTwoInput from "@/components/sample/sample-two-input";
 
-const ButtonZoom = () => {
+const ButtonSwapFace = () => {
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
   const handleClick = async () => {
-    if (!input.referencePhoto) return;
+    if (!input.referencePhoto || !input.targetPhoto) return;
     dispatch(setIsLoading(true));
     setIsCurrentLoading(true);
     try {
       for (let i = 0; i < input.numberOfImages; i++) {
-        const res = await runGeminiConvertImage(promptData["zoom-in"], input.referencePhoto);
+        const res = await runGeminiConvertImage(promptData["swap-faces"], input.referencePhoto, input.targetPhoto);
         if (i === 0) dispatch(setResult("data:image/png;base64," + res.data));
         else dispatch(pushResult("data:image/png;base64," + res.data));
       }
@@ -36,23 +37,24 @@ const ButtonZoom = () => {
 
   return (
     <ButtonConvert
-      id={"button-zoom"}
-      className="bg-amber-600 hover:bg-amber-700"
-      isDisabled={input.isLoading || !input.referencePhoto}
+      id={"button-swap-face"}
+      className="bg-blue-600 hover:bg-blue-700"
+      isDisabled={input.isLoading || !input.referencePhoto || !input.targetPhoto}
       isLoading={input.isLoading}
-      title="Phóng to khuôn mặt trong ảnh"
+      title="Hoán đổi khuôn mặt giữa 2 ảnh"
       handleClick={handleClick}
       referencePhoto={default_img}
+      targetPhoto={swap_faces_input}
       name={
         <>
-          {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <ZoomIn className="w-4 h-4" />}
-          Phóng to
+          {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+          Đổi mặt
         </>
       }
     >
-      <SampleOneInput input={default_img} result={zoom_in_image} />
+      <SampleTwoInput input1={default_img} input2={swap_faces_input} result={swap_faces} />
     </ButtonConvert>
   );
 };
 
-export default ButtonZoom;
+export default ButtonSwapFace;

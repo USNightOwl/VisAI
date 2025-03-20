@@ -83,7 +83,7 @@ export async function runGeminiGenerateImage(prompt: string) {
   }
 }
 
-export async function runGeminiConvertImage(prompt: string, base64Image: string) {
+export async function runGeminiConvertImage(prompt: string, base64Image: string, base64Image2?: string) {
   const apiKey = localStorage.getItem("apiKey")?.replace('"', "").replace('"', "") || "";
 
   const genAI = new GoogleGenerativeAI(apiKey);
@@ -105,6 +105,15 @@ export async function runGeminiConvertImage(prompt: string, base64Image: string)
       },
     },
   ];
+
+  if (base64Image2) {
+    contents.push({
+      inlineData: {
+        mimeType: "image/png",
+        data: base64Image2.replace("data:image/png;base64,", "").replace("data:image/jpeg;base64,", ""),
+      },
+    });
+  }
 
   const model = genAI.getGenerativeModel({
     model: "gemini-2.0-flash-exp",
