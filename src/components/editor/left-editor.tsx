@@ -54,6 +54,7 @@ const LeftEditor = () => {
               className="flex items-center gap-1 px-2 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 cursor-pointer"
               onClick={() => {
                 dispatch(setReferencePhoto(currentImage));
+                toast.success("Đã đặt hình ảnh làm tham chiếu");
               }}
             >
               <RefreshCw className="w-4 h-4" />

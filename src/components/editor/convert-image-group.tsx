@@ -1,6 +1,7 @@
 import { ChevronLeft } from "lucide-react";
 import { useState } from "react";
 import ButtonZoom from "../button/convert/button-zoom";
+import ButtonExpand from "../button/convert/button-expand";
 
 const ConvertImageGroup = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -18,6 +19,7 @@ const ConvertImageGroup = () => {
           <div className="grid grid-cols-2 gap-3">
             {/* Zoom */}
             <ButtonZoom />
+            <ButtonExpand />
           </div>
         </div>
       )}
