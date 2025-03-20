@@ -101,7 +101,7 @@ export async function runGeminiConvertImage(prompt: string, base64Image: string)
     {
       inlineData: {
         mimeType: "image/png",
-        data: base64Image.replace("data:image/png;base64,", ""),
+        data: base64Image.replace("data:image/png;base64,", "").replace("data:image/jpeg;base64,", ""),
       },
     },
   ];
