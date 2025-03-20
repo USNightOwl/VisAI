@@ -5,6 +5,7 @@ import ButtonExpand from "../button/convert/button-expand";
 import ButtonSwapFace from "../button/convert/button-swap-face";
 import ButtonVton from "../button/convert/button-vton";
 import ButtonProductAdvertising from "../button/convert/button-product-advertising";
+import ButtonAddAccessories from "../button/convert/button-add-accessories";
 
 const ConvertImageGroup = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -26,6 +27,7 @@ const ConvertImageGroup = () => {
             <ButtonSwapFace />
             <ButtonVton />
             <ButtonProductAdvertising />
+            <ButtonAddAccessories />
           </div>
         </div>
       )}

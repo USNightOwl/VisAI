@@ -1,28 +1,29 @@
 import ButtonConvert from "../button-convert";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppState } from "@/store";
-import { LoaderCircle, ZoomOut } from "lucide-react";
+import { Glasses, LoaderCircle } from "lucide-react";
 import default_img from "@/assets/sample/default.webp";
-import zoom_out_image from "@/assets/sample/zoom_out.webp";
-import SampleOneInput from "@/components/sample/sample-one-input";
+import accessories_input from "@/assets/sample/accessories_input.webp";
+import accessories from "@/assets/sample/accessories.webp";
 import { runGeminiConvertImage } from "@/config/gemini";
 import { promptData } from "@/constants/prompt";
 import { setIsLoading } from "@/store/input";
 import { parseStatusCode } from "@/utils/convert";
 import { pushResult, setResult } from "@/store/result";
 import { useState } from "react";
+import SampleTwoInput from "@/components/sample/sample-two-input";
 
-const ButtonExpand = () => {
+const ButtonAddAccessories = () => {
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
   const handleClick = async () => {
-    if (!input.referencePhoto) return;
+    if (!input.referencePhoto || !input.targetPhoto) return;
     dispatch(setIsLoading(true));
     setIsCurrentLoading(true);
     try {
       for (let i = 0; i < input.numberOfImages; i++) {
-        const res = await runGeminiConvertImage(promptData["expand"], input.referencePhoto);
+        const res = await runGeminiConvertImage(promptData["add-accessories"], input.referencePhoto, input.targetPhoto);
         if (i === 0) dispatch(setResult("data:image/png;base64," + res.data));
         else dispatch(pushResult("data:image/png;base64," + res.data));
       }
@@ -36,23 +37,24 @@ const ButtonExpand = () => {
 
   return (
     <ButtonConvert
-      id={"button-expand"}
-      className="bg-cyan-600 hover:bg-cyan-700"
-      isDisabled={input.isLoading || !input.referencePhoto}
+      id={"button-add-accessories"}
+      className="bg-teal-600 hover:bg-teal-700"
+      isDisabled={input.isLoading || !input.referencePhoto || !input.targetPhoto}
       isLoading={input.isLoading}
-      title="Mở rộng để hiển thị nhiều hơn"
+      title="Thêm phụ kiện cho người trong ảnh"
       handleClick={handleClick}
       referencePhoto={default_img}
+      targetPhoto={accessories_input}
       name={
         <>
-          {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <ZoomOut className="w-4 h-4" />}
-          Mở rộng
+          {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Glasses className="w-4 h-4" />}
+          Phụ kiện
         </>
       }
     >
-      <SampleOneInput input={default_img} result={zoom_out_image} />
+      <SampleTwoInput input1={default_img} input2={accessories_input} result={accessories} />
     </ButtonConvert>
   );
 };
 
-export default ButtonExpand;
+export default ButtonAddAccessories;

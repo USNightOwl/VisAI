@@ -41,7 +41,7 @@ const ButtonProductAdvertising = () => {
 
   return (
     <ButtonConvert
-      id={"button-swap-face"}
+      id={"button-product-advertising"}
       className="bg-purple-600 hover:bg-purple-700"
       isDisabled={input.isLoading || !input.referencePhoto || !input.targetPhoto}
       isLoading={input.isLoading}
