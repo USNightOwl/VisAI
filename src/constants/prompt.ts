@@ -7,6 +7,7 @@ export const promptData = {
   vton: "Make an fashion photo of the person in the first image wearing the clothes in the second image while keeping the background of the first image intact",
   "product-advertising":
     "A close up photo of the person in the first image presenting the package in the second image with a smile",
+  "add-accessories": "A photo of the person in the first image wearing the {prompt} in the second image",
   "product-decorate":
     "Place the product in the first image in the {prompt}. Make sure that the product is centered in the image.",
   "interior-design":
