@@ -1,6 +1,7 @@
 import { SamplePhoto } from "@/constants/sample-photo";
 import { AppDispatch, AppState } from "@/store";
 import { setReferencePhoto } from "@/store/input";
+import { convertImageToBase64 } from "@/utils/convert";
 import { ChevronLeft, ChevronRight, Copy, Download, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -29,6 +30,13 @@ const LeftEditor = () => {
     }
   };
 
+  const handleSetReferencePhoto = async () => {
+    if (!currentImage.includes("base64")) {
+      dispatch(setReferencePhoto(await convertImageToBase64(currentImage)));
+    } else dispatch(setReferencePhoto(currentImage));
+    toast.success("Đã đặt hình ảnh làm tham chiếu");
+  };
+
   useEffect(() => {
     if (results.results.length > 0) {
       changeShowImage(0);
@@ -52,10 +60,7 @@ const LeftEditor = () => {
             </a>
             <button
               className="flex items-center gap-1 px-2 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 cursor-pointer"
-              onClick={() => {
-                dispatch(setReferencePhoto(currentImage));
-                toast.success("Đã đặt hình ảnh làm tham chiếu");
-              }}
+              onClick={handleSetReferencePhoto}
             >
               <RefreshCw className="w-4 h-4" />
               <span>Làm ảnh tham chiếu</span>

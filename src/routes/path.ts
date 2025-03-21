@@ -1,5 +1,6 @@
 const path = {
   HOME: "/",
+  HISTORY: "/history",
   OTHER: "*",
 };
 
