@@ -46,6 +46,7 @@ export function parseStatusCode(error: Error): number {
 
   const match = regex.exec(error.message);
   if (match === null) {
+    toast.error("Something went wrong");
     throw new SyntaxError("Couldn't parse the status code from the message: " + error.message);
   }
 

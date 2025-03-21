@@ -12,6 +12,7 @@ import ButtonPose from "../button/convert/button-pose";
 import ButtonFaceExpression from "../button/convert/button-face-expression";
 import ButtonAge from "../button/convert/button-age";
 import ButtonChangeBackground from "../button/convert/button-change-background";
+import ButtonJob from "../button/convert/button-job";
 
 const ConvertImageGroup = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -40,6 +41,7 @@ const ConvertImageGroup = () => {
             <ButtonFaceExpression />
             <ButtonAge />
             <ButtonChangeBackground />
+            <ButtonJob />
           </div>
         </div>
       )}
