@@ -14,4 +14,6 @@ export const promptData = {
     "Change the interior design of this room to {prompt} style. Always use dramatic lighting to make the room look more interesting.",
   "fasion-pose": "Make a professional fashion pose for a Vogue, Elle magazine",
   "face-expression": "Change the face and body expression of this person to {prompt}",
+  "age-variance": "What does this person look like when they are {prompt}.",
+  "change-background": "Change the background and lighting of this image to {prompt}",
 };

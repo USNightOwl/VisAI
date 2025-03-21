@@ -348,3 +348,133 @@ export const FaceExpressionOptions: IOption[] = [
     prompt: "Excited",
   },
 ];
+
+export const AgeVariationOptions: IOption[] = [
+  {
+    name: "20 tuổi",
+    prompt: "20 years old",
+  },
+  {
+    name: "25 tuổi",
+    prompt: "25 years old",
+  },
+  {
+    name: "30 tuổi",
+    prompt: "30 years old",
+  },
+  {
+    name: "35 tuổi",
+    prompt: "35 years old",
+  },
+  {
+    name: "40 tuổi",
+    prompt: "40 years old",
+  },
+  {
+    name: "45 tuổi",
+    prompt: "45 years old",
+  },
+  {
+    name: "50 tuổi",
+    prompt: "50 years old",
+  },
+  {
+    name: "55 tuổi",
+    prompt: "55 years old",
+  },
+  {
+    name: "60 tuổi",
+    prompt: "60 years old",
+  },
+  {
+    name: "65 tuổi",
+    prompt: "65 years old",
+  },
+  {
+    name: "70 tuổi",
+    prompt: "70 years old",
+  },
+  {
+    name: "75 tuổi",
+    prompt: "75 years old",
+  },
+  {
+    name: "80 tuổi",
+    prompt: "80 years old",
+  },
+  {
+    name: "85 tuổi",
+    prompt: "85 years old",
+  },
+  {
+    name: "90 tuổi",
+    prompt: "90 years old",
+  },
+  {
+    name: "95 tuổi",
+    prompt: "95 years old",
+  },
+  {
+    name: "100 tuổi",
+    prompt: "100 years old",
+  },
+];
+
+export const BackgroundOptions: IOption[] = [
+  {
+    name: "Nền xanh",
+    prompt: "Green screen",
+  },
+  {
+    name: "Nền trắng",
+    prompt: "White screen",
+  },
+  {
+    name: "Mờ nền",
+    prompt: "Blur background",
+  },
+  {
+    name: "Bãi biển",
+    prompt: "Beach",
+  },
+  {
+    name: "Núi",
+    prompt: "Mountain",
+  },
+  {
+    name: "Rừng",
+    prompt: "Forest",
+  },
+  {
+    name: "Sa mạc",
+    prompt: "Desert",
+  },
+  {
+    name: "Tuyết",
+    prompt: "Snow",
+  },
+  {
+    name: "Mưa",
+    prompt: "Rain",
+  },
+  {
+    name: "Cánh đồng hoa đầy màu sắc",
+    prompt: "Colorful flower field",
+  },
+  {
+    name: "Đường phố về đêm",
+    prompt: "Night street",
+  },
+  {
+    name: "Cyberpunk",
+    prompt: "Cyberpunk",
+  },
+  {
+    name: "Hoàng hôn",
+    prompt: "Sunset",
+  },
+  {
+    name: "Làng quê",
+    prompt: "Countryside",
+  },
+];
