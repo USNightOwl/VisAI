@@ -1,7 +1,9 @@
 import { AppDispatch } from "@/store";
 import { setReferencePhoto, setTargetPhoto } from "@/store/input";
+import { IOption } from "@/types/option";
 import { convertImageToBase64 } from "@/utils/convert";
-import React from "react";
+import { X } from "lucide-react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Tooltip } from "react-tooltip";
@@ -16,10 +18,12 @@ type Props = {
   isLoading?: boolean;
   referencePhoto: string;
   targetPhoto?: string;
-  handleClick: () => void;
+  // eslint-disable-next-line no-unused-vars
+  handleClick: (prompt: string) => void;
+  options: IOption[];
 };
 
-const ButtonConvert = ({
+const ButtonConvertWithOption = ({
   id,
   referencePhoto,
   targetPhoto,
@@ -27,11 +31,14 @@ const ButtonConvert = ({
   title,
   children,
   handleClick,
+  options,
   className = "",
   isDisabled = true,
   isLoading = false,
 }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleChangeInputPhoto = () => {
     convertImageToBase64(referencePhoto)
       .then((base64) => {
@@ -54,6 +61,11 @@ const ButtonConvert = ({
     }
   };
 
+  const handleSelect = (option: IOption) => {
+    handleClick(option.prompt);
+    setIsOpen(false);
+  };
+
   return (
     <>
       <button
@@ -61,7 +73,7 @@ const ButtonConvert = ({
         disabled={isDisabled}
         id={id}
         data-tooltip-delay-show={300}
-        onClick={handleClick}
+        onClick={() => setIsOpen(true)}
       >
         <span className="text-sm flex items-center gap-2">{name}</span>
       </button>
@@ -87,8 +99,34 @@ const ButtonConvert = ({
           </div>
         </div>
       </Tooltip>
+      {isOpen && (
+        <>
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-1000" onClick={() => setIsOpen(false)}></div>
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-3xl shadow-xl z-1000">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold">Lựa chọn chỉnh sửa</h2>
+              <button className="text-gray-400 hover:text-gray-600 cursor-pointer" onClick={() => setIsOpen(false)}>
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="space-y-4 max-h-[70vh] overflow-y-auto">
+              <div className="grid grid-cols-3 gap-4">
+                {options.map((option, index) => (
+                  <button
+                    key={index}
+                    className="py-4 px-6 text-base text-center rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-colors cursor-pointer"
+                    onClick={() => handleSelect(option)}
+                  >
+                    {option.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };
 
-export default ButtonConvert;
+export default ButtonConvertWithOption;

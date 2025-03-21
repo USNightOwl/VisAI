@@ -1,4 +1,3 @@
-import ButtonConvert from "../button-convert";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppState } from "@/store";
 import { Glasses, LoaderCircle } from "lucide-react";
@@ -12,18 +11,24 @@ import { parseStatusCode } from "@/utils/convert";
 import { pushResult, setResult } from "@/store/result";
 import { useState } from "react";
 import SampleTwoInput from "@/components/sample/sample-two-input";
+import ButtonConvertWithOption from "../button-convert-with-option";
+import { AccessoriesOptions } from "@/constants/options";
 
 const ButtonAddAccessories = () => {
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
-  const handleClick = async () => {
+  const handleClick = async (prompt: string) => {
     if (!input.referencePhoto || !input.targetPhoto) return;
     dispatch(setIsLoading(true));
     setIsCurrentLoading(true);
     try {
       for (let i = 0; i < input.numberOfImages; i++) {
-        const res = await runGeminiConvertImage(promptData["add-accessories"], input.referencePhoto, input.targetPhoto);
+        const res = await runGeminiConvertImage(
+          promptData["add-accessories"].replace("{prompt}", prompt),
+          input.referencePhoto,
+          input.targetPhoto,
+        );
         if (i === 0) dispatch(setResult("data:image/png;base64," + res.data));
         else dispatch(pushResult("data:image/png;base64," + res.data));
       }
@@ -36,7 +41,8 @@ const ButtonAddAccessories = () => {
   };
 
   return (
-    <ButtonConvert
+    <ButtonConvertWithOption
+      options={AccessoriesOptions}
       id={"button-add-accessories"}
       className="bg-teal-600 hover:bg-teal-700"
       isDisabled={input.isLoading || !input.referencePhoto || !input.targetPhoto}
@@ -53,7 +59,7 @@ const ButtonAddAccessories = () => {
       }
     >
       <SampleTwoInput input1={default_img} input2={accessories_input} result={accessories} />
-    </ButtonConvert>
+    </ButtonConvertWithOption>
   );
 };
 
