@@ -8,6 +8,8 @@ import ButtonProductAdvertising from "../button/convert/button-product-advertisi
 import ButtonAddAccessories from "../button/convert/button-add-accessories";
 import ButtonProductDecorate from "../button/convert/button-product-decorate";
 import ButtonInterior from "../button/convert/button-interior";
+import ButtonPose from "../button/convert/button-pose";
+import ButtonFaceExpression from "../button/convert/button-face-expression";
 
 const ConvertImageGroup = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -32,6 +34,8 @@ const ConvertImageGroup = () => {
             <ButtonAddAccessories />
             <ButtonProductDecorate />
             <ButtonInterior />
+            <ButtonPose />
+            <ButtonFaceExpression />
           </div>
         </div>
       )}

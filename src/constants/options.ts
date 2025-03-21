@@ -301,3 +301,50 @@ export const InteriorOptions: IOption[] = [
     prompt: "Chinese",
   },
 ];
+
+export const FaceExpressionOptions: IOption[] = [
+  {
+    name: "Vui vẻ",
+    prompt: "Happy",
+  },
+  {
+    name: "Buồn",
+    prompt: "Sad",
+  },
+  {
+    name: "Giận dữ",
+    prompt: "Angry",
+  },
+  {
+    name: "Sợ hãi",
+    prompt: "Fear",
+  },
+  {
+    name: "Ngạc nhiên",
+    prompt: "Surprise",
+  },
+  {
+    name: "Chán chường",
+    prompt: "Bored",
+  },
+  {
+    name: "Mệt mỏi",
+    prompt: "Tired",
+  },
+  {
+    name: "Ghê tởm",
+    prompt: "Disgust",
+  },
+  {
+    name: "Khinh thường",
+    prompt: "Contempt",
+  },
+  {
+    name: "Bối rối",
+    prompt: "Confused",
+  },
+  {
+    name: "Phấn khích",
+    prompt: "Excited",
+  },
+];

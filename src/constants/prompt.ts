@@ -12,4 +12,6 @@ export const promptData = {
     "Place the product in the first image in the {prompt}. Make sure that the product is centered in the image.",
   "interior-design":
     "Change the interior design of this room to {prompt} style. Always use dramatic lighting to make the room look more interesting.",
+  "fasion-pose": "Make a professional fashion pose for a Vogue, Elle magazine",
+  "face-expression": "Change the face and body expression of this person to {prompt}",
 };
