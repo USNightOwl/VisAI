@@ -9,4 +9,6 @@ export const promptData = {
     "A close up photo of the person in the first image presenting the package in the second image with a smile",
   "product-decorate":
     "Place the product in the first image in the {prompt}. Make sure that the product is centered in the image.",
+  "interior-design":
+    "Change the interior design of this room to {prompt} style. Always use dramatic lighting to make the room look more interesting.",
 };

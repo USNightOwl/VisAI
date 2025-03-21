@@ -202,3 +202,102 @@ export const ProductDecorateOptions: IOption[] = [
     prompt: "In colorful flower field",
   },
 ];
+
+export const InteriorOptions: IOption[] = [
+  {
+    name: "Minimalism",
+    prompt: "Minimalism",
+  },
+  {
+    name: "Bohemian",
+    prompt: "Bohemian",
+  },
+  {
+    name: "Mid-century modern",
+    prompt: "Mid-century modern",
+  },
+  {
+    name: "Bắc Âu",
+    prompt: "Scandinavian",
+  },
+  {
+    name: "Công nghiệp",
+    prompt: "Industrial",
+  },
+  {
+    name: "Art Deco",
+    prompt: "Art Deco",
+  },
+  {
+    name: "Transitional",
+    prompt: "Transitional",
+  },
+  {
+    name: "Modern farmhouse",
+    prompt: "Modern farmhouse",
+  },
+  {
+    name: "Truyền thống",
+    prompt: "Traditional",
+  },
+  {
+    name: "Ven biển",
+    prompt: "Coastal",
+  },
+  {
+    name: "Contemporary",
+    prompt: "Contemporary",
+  },
+  {
+    name: "Rustic",
+    prompt: "Rustic",
+  },
+  {
+    name: "Eclecticism",
+    prompt: "Eclecticism",
+  },
+  {
+    name: "Đồng quê Pháp",
+    prompt: "French country",
+  },
+  {
+    name: "Shabby Chic",
+    prompt: "Shabby Chic",
+  },
+  {
+    name: "Nhật Bản",
+    prompt: "Japanese",
+  },
+  {
+    name: "Farmhouse",
+    prompt: "Farmhouse",
+  },
+  {
+    name: "Hollywood Regency",
+    prompt: "Hollywood Regency",
+  },
+  {
+    name: "Modern",
+    prompt: "Modern",
+  },
+  {
+    name: "Industrial style",
+    prompt: "Industrial style",
+  },
+  {
+    name: "Lộng lẫy",
+    prompt: "Glamorous",
+  },
+  {
+    name: "Địa Trung Hải",
+    prompt: "Mediterranean",
+  },
+  {
+    name: "Bauhaus",
+    prompt: "Bauhaus",
+  },
+  {
+    name: "Trung Hoa",
+    prompt: "Chinese",
+  },
+];
