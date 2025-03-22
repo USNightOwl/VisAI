@@ -12,8 +12,10 @@ import { useState } from "react";
 import ButtonConvertWithOption from "../button-convert-with-option";
 import { InteriorOptions } from "@/constants/options";
 import SampleOneInput from "@/components/sample/sample-one-input";
+import { useTranslation } from "react-i18next";
 
 const ButtonInterior = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -45,13 +47,13 @@ const ButtonInterior = () => {
       className="bg-sky-600 hover:bg-sky-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}
-      title="Đổi phong cách nội thất"
+      title={t("edit.title.interior-design")}
       handleClick={handleClick}
       referencePhoto={interior}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <House className="w-4 h-4" />}
-          Nội thất
+          {t("edit.interior-design")}
         </>
       }
     >

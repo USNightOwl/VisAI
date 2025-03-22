@@ -1,0 +1,75 @@
+{
+  "navbar": {
+    "name": "Chỉnh Sửa Ảnh",
+    "history": "Lịch sử"
+  },
+  "toast": {
+    "success": {
+      "image-copied": "Đã sao chép ảnh vào clipboard!",
+      "image-set-reference": "Đã đặt ảnh làm tham chiếu",
+      "image-clear": "Đã xóa tất cả hình ảnh khỏi lịch sử"
+    },
+    "error": {
+    }
+  },
+  "input": {
+    "upload-image": "Tải Lên Hình Ảnh",
+    "reference-photo": "Ảnh Tham Chiếu",
+    "target-photo": "Ảnh Mục Tiêu",
+    "upload-reference-photo": "Tải lên ảnh tham chiếu",
+    "upload-target-photo": "Tải lên ảnh mục tiêu",
+    "number-of-photos": "Số Lượng Ảnh",
+    "max": "Tối đa",
+    "create-photos": "Tạo Ảnh",
+    "describe-image": "Mô tả hình ảnh bạn muốn tạo...",
+    "enlighten-me": "Gợi Ý Ngẫu Nhiên",
+    "generate-image": "Tạo Ảnh"
+  },
+  "edit": {
+    "transformation": "Biến đổi",
+    "zoom-in": "Phóng to",
+    "expand": "Mở rộng",
+    "swap-faces": "Đổi mặt",
+    "try-on": "Thử đồ",
+    "product-ad": "QC sản phẩm",
+    "accessories": "Phụ kiện",
+    "product-shot": "Ảnh sản phẩm",
+    "interior-design": "Nội thất",
+    "fashion-pose": "Tạo dáng",
+    "face-expression": "Biểu cảm",
+    "age-variation": "Biến đổi tuổi",
+    "change-background": "Thay đổi nền",
+    "job": "Nghề nghiệp",
+    "custom": "Tùy chỉnh",
+    "title": {
+      "zoom-in": "Phóng to khuôn mặt trong ảnh",
+      "expand": "Mở rộng để hiển thị nhiều hơn",
+      "swap-faces": "Hoán đổi khuôn mặt giữa 2 ảnh",
+      "try-on": "Thử đồ từ ảnh thứ hai lên người trong ảnh đầu tiên",
+      "product-ad": "Tạo ảnh người đang cầm/giới thiệu sản phẩm",
+      "accessories": "Thêm phụ kiện cho người trong ảnh",
+      "product-shot": "Đặt sản phẩm vào một vị trí cụ thể",
+      "interior-design": "Đổi phong cách nội thất",
+      "fashion-pose": "Tạo dáng thời trang chuyên nghiệp",
+      "face-expression": "Thay đổi biểu cảm khuôn mặt",
+      "age-variation": "Thay đổi tuổi của người trong ảnh",
+      "change-background": "Thay đổi phông nền của ảnh",
+      "job": "Thay đổi ngành nghề của người trong ảnh",
+      "custom": "Nhập prompt để chỉnh sửa ảnh. Ảnh thứ hai là tùy chọn"
+    }
+  },
+  "image-preview": "Xem Trước",
+  "download": "Tải Xuống",
+  "use-reference": "Làm ảnh tham chiếu",
+  "footer": "sử dụng Gemini API",
+  "use-same-image": "Sử dụng ảnh mẫu",
+  "select-edit": "Lựa chọn chỉnh sửa",
+  "back-to-editor": "Quay lại trình biên tập",
+  "image-history": "Lịch sử hình ảnh",
+  "storage-used": "Dung lượng đã sử dụng:",
+  "clear-all": "Xóa tất cả",
+  "no-image-history": "Chưa có hình ảnh trong lịch sử. Hãy xử lý một số hình ảnh trước!",
+  "confirm-delete": "Bạn có chắc chắn muốn xóa mục này trong lịch sử không?",
+  "confirm-clear": "Bạn có chắc chắn muốn xóa tất cả các mục trong lịch sử không?",
+  "click-to-use": "Nhấp để sử dụng"
+}

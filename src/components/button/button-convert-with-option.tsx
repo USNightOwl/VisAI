@@ -5,6 +5,7 @@ import { convertImageToBase64 } from "@/utils/convert";
 import { X } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Tooltip } from "react-tooltip";
 
@@ -36,6 +37,7 @@ const ButtonConvertWithOption = ({
   isDisabled = true,
   isLoading = false,
 }: Props) => {
+  const [t] = useTranslation("global");
   const dispatch = useDispatch<AppDispatch>();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -93,7 +95,7 @@ const ButtonConvertWithOption = ({
                 disabled={isLoading}
                 onClick={handleChangeInputPhoto}
               >
-                Sử dụng ảnh mẫu
+                {t("use-same-image")}
               </button>
             </div>
           </div>
@@ -104,7 +106,7 @@ const ButtonConvertWithOption = ({
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-1000" onClick={() => setIsOpen(false)}></div>
           <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-3xl shadow-xl z-1000">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">Lựa chọn chỉnh sửa</h2>
+              <h2 className="text-xl font-semibold">{t("select-edit")}</h2>
               <button className="text-gray-400 hover:text-gray-600 cursor-pointer" onClick={() => setIsOpen(false)}>
                 <X className="w-5 h-5" />
               </button>

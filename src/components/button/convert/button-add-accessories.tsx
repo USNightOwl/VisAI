@@ -13,8 +13,10 @@ import { useState } from "react";
 import SampleTwoInput from "@/components/sample/sample-two-input";
 import ButtonConvertWithOption from "../button-convert-with-option";
 import { AccessoriesOptions } from "@/constants/options";
+import { useTranslation } from "react-i18next";
 
 const ButtonAddAccessories = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -47,14 +49,14 @@ const ButtonAddAccessories = () => {
       className="bg-teal-600 hover:bg-teal-700"
       isDisabled={input.isLoading || !input.referencePhoto || !input.targetPhoto}
       isLoading={input.isLoading}
-      title="Thêm phụ kiện cho người trong ảnh"
+      title={t("edit.title.accessories")}
       handleClick={handleClick}
       referencePhoto={default_img}
       targetPhoto={accessories_input}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Glasses className="w-4 h-4" />}
-          Phụ kiện
+          {t("edit.accessories")}
         </>
       }
     >

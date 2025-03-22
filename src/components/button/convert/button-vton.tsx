@@ -12,8 +12,10 @@ import { parseStatusCode } from "@/utils/convert";
 import { pushResult, setResult } from "@/store/result";
 import { useState } from "react";
 import SampleTwoInput from "@/components/sample/sample-two-input";
+import { useTranslation } from "react-i18next";
 
 const ButtonVton = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -41,14 +43,14 @@ const ButtonVton = () => {
       className="bg-green-600 hover:bg-green-700"
       isDisabled={input.isLoading || !input.referencePhoto || !input.targetPhoto}
       isLoading={input.isLoading}
-      title="Thử đồ từ ảnh thứ hai lên người trong ảnh đầu tiên"
+      title={t("edit.title.try-on")}
       handleClick={handleClick}
       referencePhoto={default_img}
       targetPhoto={try_on_input}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Shirt className="w-4 h-4" />}
-          Thử đồ
+          {t("edit.try-on")}
         </>
       }
     >

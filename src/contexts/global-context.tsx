@@ -1,9 +1,12 @@
 import { useLocalStorageState } from "@/hooks/use-localstorage-state";
+import { ELanguage } from "@/types/language";
 import { Dispatch, ReactNode, SetStateAction, createContext } from "react";
 
 interface GlobalContextType {
   apiKey: string;
+  language: ELanguage;
   setApiKey: Dispatch<SetStateAction<string>>;
+  setLanguage: Dispatch<SetStateAction<ELanguage>>;
 }
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
@@ -18,12 +21,18 @@ const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
     key: "apiKey",
     initialState: "",
   });
+  const [language, setLanguage] = useLocalStorageState({
+    key: "language",
+    initialState: ELanguage.VI,
+  });
 
   return (
     <GlobalContext.Provider
       value={{
         apiKey,
         setApiKey,
+        language,
+        setLanguage,
       }}
     >
       {children}

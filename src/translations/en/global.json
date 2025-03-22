@@ -1,0 +1,75 @@
+{
+  "navbar": {
+    "name": "Image Editor",
+    "history": "History"
+  },
+  "toast": {
+    "success": {
+      "image-copied": "Image copied to clipboard!",
+      "image-set-reference": "Image set as reference",
+      "image-clear": "All images deleted from history"
+    },
+    "error": {
+    }
+  },
+  "input": {
+    "upload-image": "Upload Image",
+    "reference-photo": "Reference Photo",
+    "target-photo": "Target Photo",
+    "upload-reference-photo": "Upload first image",
+    "upload-target-photo": "Upload second image",
+    "number-of-photos": "Number of photos",
+    "max": "Max",
+    "create-photos": "Create Photos",
+    "describe-image": "Describe the image you want to create...",
+    "enlighten-me": "Enlighten Me",
+    "generate-image": "Generate Image"
+  },
+  "edit": {
+    "transformation": "Transformations",
+    "zoom-in": "Zoom In",
+    "expand": "Expand",
+    "swap-faces": "Swap Faces",
+    "try-on": "Try On",
+    "product-ad": "Product Ad",
+    "accessories": "Accessories",
+    "product-shot": "Product Shot",
+    "interior-design": "Interior Design",
+    "fashion-pose": "Fashion Pose",
+    "face-expression": "Face Expression",
+    "age-variation": "Age Variation",
+    "change-background": "Change Background",
+    "job": "Job",
+    "custom": "Custom",
+    "title": {
+      "zoom-in": "Zoom in on the face in the image",
+      "expand": "Expand to show more of the scene",
+      "swap-faces": "Swap faces between the two images",
+      "try-on": "Try on clothes from the second image on the person in the first image",
+      "product-ad": "Create an image of a person holding/presenting a product",
+      "accessories": "Create an image of a person holding/presenting a product",
+      "product-shot": "Place the product in a specific location",
+      "interior-design": "Change the interior design of a room",
+      "fashion-pose": "Create a professional fashion pose",
+      "face-expression": "Change facial expression",
+      "age-variation": "Change the age of the person in the image",
+      "change-background": "Change the background of the image",
+      "job": "Change the profession of the person in the photo",
+      "custom": "Enter your own prompt to edit the image. The second image is optional"
+    }
+  },
+  "image-preview": "Image Preview",
+  "download": "Download",
+  "use-reference": "Use This Image as Reference",
+  "footer": "powered by Gemini API",
+  "use-same-image": "Use Example Images",
+  "select-edit": "Select an edit",
+  "back-to-editor": "Back to Image Editor",
+  "image-history": "Image History",
+  "storage-used": "Storage used:",
+  "clear-all": "Clear All",
+  "no-image-history": "No images in history yet. Let's process some images first!",
+  "confirm-delete": "Are you sure you want to delete this image?",
+  "confirm-clear": "Are you sure you want to clear all images?",
+  "click-to-use": "Click to use"
+}

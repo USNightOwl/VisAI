@@ -11,8 +11,10 @@ import { setIsLoading } from "@/store/input";
 import { parseStatusCode } from "@/utils/convert";
 import { pushResult, setResult } from "@/store/result";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const ButtonExpand = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -40,13 +42,13 @@ const ButtonExpand = () => {
       className="bg-cyan-600 hover:bg-cyan-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}
-      title="Mở rộng để hiển thị nhiều hơn"
+      title={t("edit.title.expand")}
       handleClick={handleClick}
       referencePhoto={default_img}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <ZoomOut className="w-4 h-4" />}
-          Mở rộng
+          {t("edit.expand")}
         </>
       }
     >

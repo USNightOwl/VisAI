@@ -12,8 +12,10 @@ import { useState } from "react";
 import ButtonConvertWithOption from "../button-convert-with-option";
 import { BackgroundOptions } from "@/constants/options";
 import SampleOneInput from "@/components/sample/sample-one-input";
+import { useTranslation } from "react-i18next";
 
 const ButtonChangeBackground = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -45,13 +47,13 @@ const ButtonChangeBackground = () => {
       className="bg-orange-600 hover:bg-orange-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}
-      title="Thay đổi phông nền của ảnh"
+      title={t("edit.title.change-background")}
       handleClick={handleClick}
       referencePhoto={default_img}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Image className="w-4 h-4" />}
-          Thay đổi nền
+          {t("edit.change-background")}
         </>
       }
     >

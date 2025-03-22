@@ -5,9 +5,11 @@ import { convertImageToBase64 } from "@/utils/convert";
 import { ChevronLeft, ChevronRight, Copy, Download, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 const LeftEditor = () => {
+  const [t] = useTranslation("global");
   const [currentImage, setCurrentImage] = useState(SamplePhoto[0].url);
   const [curentIndex, setCurrentIndex] = useState(0);
 
@@ -24,7 +26,7 @@ const LeftEditor = () => {
     try {
       const textToCopy = currentImage;
       await navigator.clipboard.writeText(textToCopy);
-      toast.success("Đã sao chép ảnh vào clipboard!");
+      toast.success(t("toast.success.image-copied"));
     } catch (error) {
       console.error("Lỗi khi sao chép:", error);
     }
@@ -34,7 +36,7 @@ const LeftEditor = () => {
     if (!currentImage.includes("base64")) {
       dispatch(setReferencePhoto(await convertImageToBase64(currentImage)));
     } else dispatch(setReferencePhoto(currentImage));
-    toast.success("Đã đặt hình ảnh làm tham chiếu");
+    toast.success(t("toast.success.image-set-reference"));
   };
 
   useEffect(() => {
@@ -48,7 +50,7 @@ const LeftEditor = () => {
     <div className="w-full lg:w-3/5 order-2 lg:order-1">
       <div className="bg-white rounded-lg shadow-md p-4 flex flex-col md:h-[calc(100vh-8rem)]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
-          <h2 className="text-xl font-semibold">Xem Trước</h2>
+          <h2 className="text-xl font-semibold">{t("image-preview")}</h2>
           <div className="flex gap-2 mt-2 sm:mt-0">
             <a
               href={currentImage}
@@ -56,14 +58,14 @@ const LeftEditor = () => {
               className="flex items-center gap-1 px-2 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 cursor-pointer"
             >
               <Download className="w-4 h-4" />
-              <span>Tải Xuống</span>
+              <span>{t("download")}</span>
             </a>
             <button
               className="flex items-center gap-1 px-2 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 cursor-pointer"
               onClick={handleSetReferencePhoto}
             >
               <RefreshCw className="w-4 h-4" />
-              <span>Làm ảnh tham chiếu</span>
+              <span>{t("use-reference")}</span>
             </button>
           </div>
         </div>

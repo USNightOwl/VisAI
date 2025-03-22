@@ -12,8 +12,10 @@ import { parseStatusCode } from "@/utils/convert";
 import { pushResult, setResult } from "@/store/result";
 import { useState } from "react";
 import SampleTwoInput from "@/components/sample/sample-two-input";
+import { useTranslation } from "react-i18next";
 
 const ButtonProductAdvertising = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -45,14 +47,14 @@ const ButtonProductAdvertising = () => {
       className="bg-purple-600 hover:bg-purple-700"
       isDisabled={input.isLoading || !input.referencePhoto || !input.targetPhoto}
       isLoading={input.isLoading}
-      title="Tạo ảnh người đang cầm/giới thiệu sản phẩm"
+      title={t("edit.title.product-ad")}
       handleClick={handleClick}
       referencePhoto={default_img}
       targetPhoto={product_ad_input}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <ShoppingBag className="w-4 h-4" />}
-          QC sản phẩm
+          {t("edit.product-ad")}
         </>
       }
     >

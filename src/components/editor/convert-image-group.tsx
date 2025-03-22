@@ -14,14 +14,16 @@ import ButtonAge from "../button/convert/button-age";
 import ButtonChangeBackground from "../button/convert/button-change-background";
 import ButtonJob from "../button/convert/button-job";
 import ButtonCustom from "../button/convert/button-custom";
+import { useTranslation } from "react-i18next";
 
 const ConvertImageGroup = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [t] = useTranslation("global");
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mb-4">
       <div className="flex justify-between items-center cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-        <h2 className="text-xl font-semibold">Biến Đổi</h2>
+        <h2 className="text-xl font-semibold">{t("edit.transformation")}</h2>
         <button className="text-gray-500 hover:text-gray-700 cursor-pointer">
           <ChevronLeft className={`w-5 h-5 transform ${isOpen ? "rotate-90" : "-rotate-90"}`} />
         </button>

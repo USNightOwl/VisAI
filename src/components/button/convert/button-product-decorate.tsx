@@ -12,8 +12,10 @@ import { useState } from "react";
 import ButtonConvertWithOption from "../button-convert-with-option";
 import { ProductDecorateOptions } from "@/constants/options";
 import SampleOneInput from "@/components/sample/sample-one-input";
+import { useTranslation } from "react-i18next";
 
 const ButtonProductDecorate = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -45,13 +47,13 @@ const ButtonProductDecorate = () => {
       className="bg-rose-600 hover:bg-rose-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}
-      title="Đặt sản phẩm vào một vị trí cụ thể"
+      title={t("edit.title.product-shot")}
       handleClick={handleClick}
       referencePhoto={product_ad_input}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Aperture className="w-4 h-4" />}
-          Ảnh sản phẩm
+          {t("edit.product-shot")}
         </>
       }
     >

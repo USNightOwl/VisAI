@@ -12,8 +12,10 @@ import { useState } from "react";
 import ButtonConvertWithOption from "../button-convert-with-option";
 import { FaceExpressionOptions } from "@/constants/options";
 import SampleOneInput from "@/components/sample/sample-one-input";
+import { useTranslation } from "react-i18next";
 
 const ButtonFaceExpression = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -45,13 +47,13 @@ const ButtonFaceExpression = () => {
       className="bg-yellow-600 hover:bg-yellow-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}
-      title="Thay đổi biểu cảm khuôn mặt"
+      title={t("edit.title.face-expression")}
       handleClick={handleClick}
       referencePhoto={default_img}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Smile className="w-4 h-4" />}
-          Biểu cảm
+          {t("edit.face-expression")}
         </>
       }
     >

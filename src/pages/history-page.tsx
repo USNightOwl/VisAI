@@ -5,8 +5,10 @@ import { IHistory, IStorageUsage } from "@/types/history";
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const HistoryPage = () => {
+  const [t] = useTranslation("global");
   const [historyData, setHistoryData] = useState<IHistory[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [storageUsage, setStorageUsage] = useState<IStorageUsage>({ percentage: 0, color: "gray" });
@@ -23,18 +25,18 @@ const HistoryPage = () => {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm("Bạn có chắc chắn muốn xóa mục này trong lịch sử không?") == true) {
+    if (confirm(t("confirm-delete")) == true) {
       await deleteData(Stores.HistoryItems, id);
       getHistoryData();
     }
   };
 
   const resetIndexedDB = async () => {
-    if (confirm("Bạn có chắc chắn muốn xóa tất cả các mục trong lịch sử không?") == true) {
+    if (confirm(t("confirm-clear")) == true) {
       indexedDB.deleteDatabase("imageEditorDB");
       await initDB(Stores.HistoryItems);
       getHistoryData();
-      toast.success("Đã xóa tất cả hình ảnh khỏi lịch sử");
+      toast.success(t("toast.success.image-clear"));
     }
   };
 
@@ -47,14 +49,14 @@ const HistoryPage = () => {
     <>
       <HistoryHeader storageUsage={storageUsage} resetStorage={resetIndexedDB} />
       <div className="max-w-7xl mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-6">Lịch sử hình ảnh</h1>
+        <h1 className="text-2xl font-bold mb-6">{t("image-history")}</h1>
         {isLoading ? (
           <div className="flex justify-center items-center h-50">
             <LoaderCircle className="animate-spin h-15 w-15 text-blue-600" />
           </div>
         ) : historyData && historyData.length === 0 ? (
           <div className="text-center p-12 bg-gray-50 rounded-lg border border-gray-200">
-            <p className="text-gray-500">Chưa có hình ảnh trong lịch sử. Hãy xử lý một số hình ảnh trước!</p>
+            <p className="text-gray-500">{t("no-image-history")}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

@@ -10,8 +10,10 @@ import { parseStatusCode } from "@/utils/convert";
 import { pushResult, setResult } from "@/store/result";
 import { useState } from "react";
 import ButtonConvertWithPrompt from "../button-convert-with-prompt";
+import { useTranslation } from "react-i18next";
 
 const ButtonCustom = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -41,13 +43,13 @@ const ButtonCustom = () => {
       className="bg-gray-600 hover:bg-gray-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}
-      title="Nhập prompt để chỉnh sửa ảnh. Ảnh thứ hai là tùy chọn"
+      title={t("edit.title.custom")}
       handleClick={handleClick}
       referencePhoto={default_img}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <WandSparkles className="w-4 h-4" />}
-          Tùy chỉnh
+          {t("edit.custom")}
         </>
       }
     >

@@ -12,8 +12,10 @@ import { parseStatusCode } from "@/utils/convert";
 import { pushResult, setResult } from "@/store/result";
 import { useState } from "react";
 import SampleTwoInput from "@/components/sample/sample-two-input";
+import { useTranslation } from "react-i18next";
 
 const ButtonSwapFace = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -41,14 +43,14 @@ const ButtonSwapFace = () => {
       className="bg-blue-600 hover:bg-blue-700"
       isDisabled={input.isLoading || !input.referencePhoto || !input.targetPhoto}
       isLoading={input.isLoading}
-      title="Hoán đổi khuôn mặt giữa 2 ảnh"
+      title={t("edit.title.swap-faces")}
       handleClick={handleClick}
       referencePhoto={default_img}
       targetPhoto={swap_faces_input}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
-          Đổi mặt
+          {t("edit.swap-faces")}
         </>
       }
     >

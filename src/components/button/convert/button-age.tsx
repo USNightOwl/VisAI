@@ -12,8 +12,10 @@ import { useState } from "react";
 import ButtonConvertWithOption from "../button-convert-with-option";
 import { AgeVariationOptions } from "@/constants/options";
 import SampleOneInput from "@/components/sample/sample-one-input";
+import { useTranslation } from "react-i18next";
 
 const ButtonAge = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -45,13 +47,13 @@ const ButtonAge = () => {
       className="bg-purple-600 hover:bg-purple-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}
-      title="Thay đổi tuổi của người trong ảnh"
+      title={t("edit.title.age-variation")}
       handleClick={handleClick}
       referencePhoto={default_img}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <User className="w-4 h-4" />}
-          Biến đổi tuổi
+          {t("edit.age-variation")}
         </>
       }
     >

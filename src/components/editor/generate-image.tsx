@@ -6,6 +6,7 @@ import { pushResult, setResult } from "@/store/result";
 import { parseStatusCode } from "@/utils/convert";
 import { ChevronLeft, LoaderCircle, Sparkles, WandSparkles } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 // eslint-disable-next-line no-unused-vars
@@ -13,6 +14,7 @@ const GeneratePrompt = ({ setPrompt }: { setPrompt: (prompt: string) => void }) 
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const input = useSelector((state: AppState) => state.input);
+  const [t] = useTranslation("global");
 
   const handleGeneratePrompt = async () => {
     dispatch(setIsLoading(true));
@@ -41,7 +43,7 @@ const GeneratePrompt = ({ setPrompt }: { setPrompt: (prompt: string) => void }) 
         ) : (
           <Sparkles className="w-4 h-4 mr-2" />
         )}
-        Gợi Ý Ngẫu Nhiên
+        {t("input.enlighten-me")}
       </span>
     </button>
   );
@@ -51,6 +53,7 @@ const GenerateImage = () => {
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const input = useSelector((state: AppState) => state.input);
+  const [t] = useTranslation("global");
 
   const handleGenerateImages = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -75,7 +78,7 @@ const GenerateImage = () => {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mb-4">
       <div className="flex justify-between items-center cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-        <h2 className="text-xl font-semibold">Tạo Ảnh</h2>
+        <h2 className="text-xl font-semibold">{t("input.create-photos")}</h2>
         <button className="text-gray-500 hover:text-gray-700 cursor-pointer">
           <ChevronLeft className={`w-5 h-5 transform ${isOpen ? "rotate-90" : "-rotate-90"}`} />
         </button>
@@ -85,7 +88,7 @@ const GenerateImage = () => {
           <form className="space-y-3" onSubmit={handleGenerateImages}>
             <div>
               <textarea
-                placeholder="Mô tả hình ảnh bạn muốn tạo..."
+                placeholder={t("input.describe-image")}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
                 value={input.prompt}
                 rows={4}
@@ -105,7 +108,7 @@ const GenerateImage = () => {
                   ) : (
                     <WandSparkles className="w-4 h-4 mr-2" />
                   )}
-                  Tạo Ảnh
+                  {t("input.generate-image")}
                 </span>
               </button>
             </div>

@@ -11,8 +11,10 @@ import { setIsLoading } from "@/store/input";
 import { parseStatusCode } from "@/utils/convert";
 import { pushResult, setResult } from "@/store/result";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const ButtonZoom = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -40,13 +42,13 @@ const ButtonZoom = () => {
       className="bg-amber-600 hover:bg-amber-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}
-      title="Phóng to khuôn mặt trong ảnh"
+      title={t("edit.title.zoom-in")}
       handleClick={handleClick}
       referencePhoto={default_img}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <ZoomIn className="w-4 h-4" />}
-          Phóng to
+          {t("edit.zoom-in")}
         </>
       }
     >

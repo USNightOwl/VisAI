@@ -4,8 +4,11 @@ import { History, Menu } from "lucide-react";
 import ModalApiKey from "@/components/modal/modal-api-key";
 import { useEffect, useRef, useState } from "react";
 import path from "@/routes/path";
+import ButtonChangeLanguage from "@/components/button/button-change-language";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+  const [t] = useTranslation("global");
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -36,7 +39,7 @@ const Header = () => {
               <Link to={path.HOME} className="text-blue-500 hover:text-blue-600">
                 VisAI
               </Link>{" "}
-              Chỉnh Sửa Ảnh
+              {t("navbar.name")}
             </h1>
           </span>
         </div>
@@ -44,10 +47,11 @@ const Header = () => {
         <div className="flex items-center gap-3">
           {/* Desktop menu */}
           <div className="hidden sm:flex items-center gap-3">
+            <ButtonChangeLanguage />
             <Link to={path.HISTORY}>
               <button className="flex items-center gap-2 px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 cursor-pointer">
                 <History className="w-5 h-5" />
-                <span className="hidden sm:inline">Lịch sử</span>
+                <span className="hidden sm:inline">{t("navbar.history")}</span>
               </button>
             </Link>
             <ModalApiKey />
@@ -65,10 +69,15 @@ const Header = () => {
                 <div className="py-1 border-b border-gray-100">
                   <Link to={path.HISTORY}>
                     <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
-                      Lịch sử
+                      {t("navbar.history")}
                     </button>
                   </Link>
                   <ModalApiKey isMobile />
+                </div>
+                <div className="py-1">
+                  <div className="px-4 py-2">
+                    <ButtonChangeLanguage isFull />
+                  </div>
                 </div>
               </div>
             )}

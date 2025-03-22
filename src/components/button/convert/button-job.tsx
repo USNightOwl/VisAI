@@ -11,8 +11,10 @@ import { useState } from "react";
 import ButtonConvertWithOption from "../button-convert-with-option";
 import SampleOneInput from "@/components/sample/sample-one-input";
 import { JobRoleOptions } from "@/constants/job_roles_prompt";
+import { useTranslation } from "react-i18next";
 
 const ButtonJob = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -41,13 +43,13 @@ const ButtonJob = () => {
       className="bg-indigo-600 hover:bg-indigo-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}
-      title="Thay đổi ngành nghề của người trong ảnh"
+      title={t("edit.title.job")}
       handleClick={handleClick}
       referencePhoto={default_img}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Building2 className="w-4 h-4" />}
-          Ngành nghề
+          {t("edit.job")}
         </>
       }
     >

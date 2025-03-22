@@ -11,8 +11,10 @@ import { setIsLoading } from "@/store/input";
 import { parseStatusCode } from "@/utils/convert";
 import { pushResult, setResult } from "@/store/result";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const ButtonPose = () => {
+  const [t] = useTranslation("global");
   const [isCurrentLoading, setIsCurrentLoading] = useState(false);
   const input = useSelector((state: AppState) => state.input);
   const dispatch = useDispatch<AppDispatch>();
@@ -40,13 +42,13 @@ const ButtonPose = () => {
       className="bg-pink-600 hover:bg-pink-700"
       isDisabled={input.isLoading || !input.referencePhoto}
       isLoading={input.isLoading}
-      title="Tạo dáng thời trang chuyên nghiệp"
+      title={t("edit.title.fashion-pose")}
       handleClick={handleClick}
       referencePhoto={default_img}
       name={
         <>
           {isCurrentLoading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Camera className="w-4 h-4" />}
-          Tạo dáng
+          {t("edit.fashion-pose")}
         </>
       }
     >

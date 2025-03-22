@@ -3,6 +3,7 @@ import { setReferencePhoto, setTargetPhoto } from "@/store/input";
 import { convertImageToBase64 } from "@/utils/convert";
 import React from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Tooltip } from "react-tooltip";
 
@@ -31,6 +32,7 @@ const ButtonConvert = ({
   isDisabled = true,
   isLoading = false,
 }: Props) => {
+  const [t] = useTranslation("global");
   const dispatch = useDispatch<AppDispatch>();
   const handleChangeInputPhoto = () => {
     convertImageToBase64(referencePhoto)
@@ -81,7 +83,7 @@ const ButtonConvert = ({
                 disabled={isLoading}
                 onClick={handleChangeInputPhoto}
               >
-                Sử dụng ảnh mẫu
+                {t("use-same-image")}
               </button>
             </div>
           </div>
