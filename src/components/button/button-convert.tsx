@@ -41,17 +41,17 @@ const ButtonConvert = ({
       })
       .catch((error) => {
         console.error(error);
-        toast.error("Có lỗi xảy ra khi tải ảnh mẫu");
+        toast.error(t("toast.error.image-sample"));
       });
     if (targetPhoto) {
       convertImageToBase64(targetPhoto)
         .then((base64) => {
           dispatch(setTargetPhoto(base64));
-          toast.success("Đã tải ảnh mẫu thành công");
+          toast.success(t("toast.success.image-sample"));
         })
         .catch((error) => {
           console.error(error);
-          toast.error("Có lỗi xảy ra khi tải ảnh mẫu");
+          toast.error(t("toast.error.image-sample"));
         });
     }
   };

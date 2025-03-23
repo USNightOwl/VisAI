@@ -7,17 +7,19 @@
     "success": {
       "image-copied": "Image copied to clipboard!",
       "image-set-reference": "Image set as reference",
-      "image-clear": "All images deleted from history"
+      "image-clear": "All images deleted from history",
+      "image-sample": "Sample image loaded successfully"
     },
     "error": {
+      "image-sample": "Error loading sample image"
     }
   },
   "input": {
     "upload-image": "Upload Image",
     "reference-photo": "Reference Photo",
     "target-photo": "Target Photo",
-    "upload-reference-photo": "Upload first image",
-    "upload-target-photo": "Upload second image",
+    "upload-reference-photo": "Upload referenceimage",
+    "upload-target-photo": "Upload target image",
     "number-of-photos": "Number of photos",
     "max": "Max",
     "create-photos": "Create Photos",
@@ -71,5 +73,7 @@
   "no-image-history": "No images in history yet. Let's process some images first!",
   "confirm-delete": "Are you sure you want to delete this image?",
   "confirm-clear": "Are you sure you want to clear all images?",
-  "click-to-use": "Click to use"
+  "click-to-use": "Click to use",
+  "prompt-placeholder": "Enter the editing prompt you want. For example: Change the girl's face to Anne Hathaway.",
+  "apply": "Apply"
 }

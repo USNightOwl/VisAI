@@ -7,9 +7,11 @@
     "success": {
       "image-copied": "Đã sao chép ảnh vào clipboard!",
       "image-set-reference": "Đã đặt ảnh làm tham chiếu",
-      "image-clear": "Đã xóa tất cả hình ảnh khỏi lịch sử"
+      "image-clear": "Đã xóa tất cả hình ảnh khỏi lịch sử",
+      "image-sample": "Đã tải ảnh mẫu thành công"
     },
     "error": {
+      "image-sample": "Có lỗi xảy ra khi tải ảnh mẫu"
     }
   },
   "input": {
@@ -71,5 +73,7 @@
   "no-image-history": "Chưa có hình ảnh trong lịch sử. Hãy xử lý một số hình ảnh trước!",
   "confirm-delete": "Bạn có chắc chắn muốn xóa mục này trong lịch sử không?",
   "confirm-clear": "Bạn có chắc chắn muốn xóa tất cả các mục trong lịch sử không?",
-  "click-to-use": "Nhấp để sử dụng"
+  "click-to-use": "Nhấp để sử dụng",
+  "prompt-placeholder": "Nhập prompt chỉnh sửa bạn muốn. VD: Đổi mặt của cô gái thành Anne Hathaway.",
+  "apply": "Áp dụng"
 }

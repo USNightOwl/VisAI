@@ -46,17 +46,17 @@ const ButtonConvertWithPrompt = ({
       })
       .catch((error) => {
         console.error(error);
-        toast.error("Có lỗi xảy ra khi tải ảnh mẫu");
+        toast.error(t("toast.error.image-sample"));
       });
     if (targetPhoto) {
       convertImageToBase64(targetPhoto)
         .then((base64) => {
           dispatch(setTargetPhoto(base64));
-          toast.success("Đã tải ảnh mẫu thành công");
+          toast.success(t("toast.success.image-sample"));
         })
         .catch((error) => {
           console.error(error);
-          toast.error("Có lỗi xảy ra khi tải ảnh mẫu");
+          toast.error(t("toast.error.image-sample"));
         });
     }
   };
@@ -112,7 +112,7 @@ const ButtonConvertWithPrompt = ({
             <div className="space-y-4 max-h-[70vh] overflow-y-auto">
               <div className="flex flex-col gap-2">
                 <textarea
-                  placeholder="Nhập prompt chỉnh sửa bạn muốn. VD: Đổi mặt của cô gái thành Anne Hathaway."
+                  placeholder={t("prompt-placeholder")}
                   className="w-full h-32 p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
@@ -122,7 +122,7 @@ const ButtonConvertWithPrompt = ({
                   disabled={prompt.length <= 0}
                   onClick={() => handleSelect()}
                 >
-                  Áp dụng
+                  {t("apply")}
                 </button>
               </div>
             </div>

@@ -1,9 +1,11 @@
+import { GlobalContext } from "@/contexts/global-context";
 import { AppDispatch } from "@/store";
 import { setReferencePhoto, setTargetPhoto } from "@/store/input";
+import { ELanguage } from "@/types/language";
 import { IOption } from "@/types/option";
 import { convertImageToBase64 } from "@/utils/convert";
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -40,6 +42,7 @@ const ButtonConvertWithOption = ({
   const [t] = useTranslation("global");
   const dispatch = useDispatch<AppDispatch>();
   const [isOpen, setIsOpen] = useState(false);
+  const { language } = useContext(GlobalContext)!;
 
   const handleChangeInputPhoto = () => {
     convertImageToBase64(referencePhoto)
@@ -48,17 +51,17 @@ const ButtonConvertWithOption = ({
       })
       .catch((error) => {
         console.error(error);
-        toast.error("Có lỗi xảy ra khi tải ảnh mẫu");
+        toast.error(t("toast.error.image-sample"));
       });
     if (targetPhoto) {
       convertImageToBase64(targetPhoto)
         .then((base64) => {
           dispatch(setTargetPhoto(base64));
-          toast.success("Đã tải ảnh mẫu thành công");
+          toast.success(t("toast.success.image-sample"));
         })
         .catch((error) => {
           console.error(error);
-          toast.error("Có lỗi xảy ra khi tải ảnh mẫu");
+          toast.error(t("toast.error.image-sample"));
         });
     }
   };
@@ -119,7 +122,7 @@ const ButtonConvertWithOption = ({
                     className="py-4 px-6 text-base text-center rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-colors cursor-pointer"
                     onClick={() => handleSelect(option)}
                   >
-                    {option.name}
+                    {language === ELanguage.VI ? option.name_vi : option.name_en}
                   </button>
                 ))}
               </div>
